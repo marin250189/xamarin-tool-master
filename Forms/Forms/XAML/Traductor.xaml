@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Forms.XAML.Traductor">
+
+	<Grid VerticalOptions="FillAndExpand">
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height ="50"/>
+			<RowDefinition Height ="*"/>
+			<RowDefinition Height ="50"/>
+			<RowDefinition Height ="*"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="50" />
+			<ColumnDefinition Width="50" />
+
+			<ColumnDefinition Width="*"/>
+
+		</Grid.ColumnDefinitions>
+
+
+		<Picker x:Name="sourceLanguagePicker" ItemsSource="{Binding Idiomas}" ItemDisplayBinding="{Binding Name}" SelectedIndex="{Binding SourceLanguagePickerIndex}" Grid.Row="0" Grid.Column="0" ></Picker>
+		<Picker x:Name="destinationLanguagePicker" ItemsSource="{Binding Idiomas}" ItemDisplayBinding="{Binding Name}" SelectedIndex="{Binding DestinationLanguagePickerIndex}" Grid.Row="0" Grid.Column="3" ></Picker>
+		<Button Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"  Text="=>>" BackgroundColor="#13C2ED" Command="{Binding TranslateCommand}" />
+		
+		<Editor x:Name="EntryToBe" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"  Placeholder="Introducir Texto" Text="{Binding EntryToBeTranslated}" ></Editor>
+
+		<Editor x:Name="EntryTranslation" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="4"  Placeholder="Traducción" Text="{Binding EntryTranslationResult}"/>
+
+		<ActivityIndicator Grid.Column="1" Grid.Row="2" x:Name="ActivityLoading" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" IsEnabled="True" HorizontalOptions="Center"></ActivityIndicator>
+
+
+
+
+
+
+	</Grid>
+	<ContentPage.Content>
+        <StackLayout>
+            <Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

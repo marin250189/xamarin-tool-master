@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Forms.XAML.Bitcoin">
+	<StackLayout>
+		<Button x:Name="getRatebtn" Grid.Row="0" Grid.ColumnSpan="2" Text="GetRate" Command="{Binding RateCommand}"></Button>
+		<Grid >
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="5*" />
+				<ColumnDefinition Width="5*"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Label Text="Currency" BackgroundColor="Green" Grid.Column="0" Grid.Row="0" />
+			<Label Text="Price" BackgroundColor="Green" Grid.Column="1" Grid.Row="0"/>
+			<Label Grid.Column="0" Grid.Row="1" Text="{Binding bitcoinModel.Currency}" VerticalOptions="Center" HorizontalOptions="Center" />
+
+			<Label  Grid.Column="1" Grid.Row="1" VerticalOptions="Center" Text="{Binding bitcoinModel.rates}"/>
+		</Grid>
+
+		
+		<Grid Margin="0,50,0,0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="5*" />
+				<ColumnDefinition Width="5*"/>
+				<ColumnDefinition Width="5*" />
+				<ColumnDefinition Width="5*" />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="50" />
+			</Grid.RowDefinitions>
+			<Label Grid.Column="0" Grid.Row="0" Margin="0,20,0,0"  Text="{Binding bitcoinModel.rates}" VerticalOptions="Center" HorizontalOptions="Center" ></Label>
+			<Button x:Name="btnCalc" Grid.Row="0" Grid.Column="1" Text="x" Clicked="btnCalc_Clicked"  ></Button>
+			<Entry x:Name="btcEntry" Grid.Row="0" Grid.Column="2" Keyboard="Text"></Entry>
+			<Label x:Name="lblCalcResult" Grid.Row="0" Grid.Column="3" Margin="0,20,0,0"></Label>
+
+		</Grid>
+	</StackLayout>
+	
+</ContentPage>
