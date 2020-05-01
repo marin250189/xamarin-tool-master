@@ -5,17 +5,22 @@
 
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="190"></RowDefinition>
-			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="50"></RowDefinition>
+			<RowDefinition Height="50"></RowDefinition>
+			<RowDefinition Height="50"></RowDefinition>
+			<RowDefinition Height="50"></RowDefinition>
+			<RowDefinition Height="60"></RowDefinition>
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"></ColumnDefinition>
-		</Grid.ColumnDefinitions>
-		<Image x:Name="DolarTodayImg" Grid.Column="0" Grid.Row="0" ></Image>
-	</Grid>
-    <ContentPage.Content>
-        <StackLayout>
 			
-		</StackLayout>
-    </ContentPage.Content>
+		</Grid.ColumnDefinitions>
+		<Label Text="AuthKey" Grid.Row="0"></Label>
+			<Entry x:Name="keyTxt" Grid.Row="1" Grid.Column="0"></Entry>
+		<Label Text="SecretKey" Grid.Row="2"></Label>
+		<Entry x:Name="secretTxt" Grid.Row="3" Grid.Column="0"></Entry>
+		<Button x:Name="addSettingsBtn" Text="Add" Clicked="addSettingsBtn_Clicked" Grid.Row="4"></Button>
+		
+	</Grid>
+    
 </ContentPage>

@@ -35,7 +35,7 @@ namespace Forms.XAML
 
 		private void Button_Siguiente(object sender, EventArgs e)
 		{
-			if (Numero >= 10)
+			if (Numero >= 15)
 			{
 				Numero = 0;
 			}

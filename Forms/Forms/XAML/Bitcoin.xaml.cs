@@ -1,12 +1,18 @@
-﻿using Forms.ViewModels;
+﻿using Forms.Model;
+using Forms.ViewModels;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Plugin.Settings;
+using Plugin.Settings.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,15 +26,74 @@ namespace Forms.XAML
 	{
 		
 		private MainPageViewModel mainPageViewModel;
+		private HttpClient _client;
+		private static ISettings AppSettings =>
+		 CrossSettings.Current;
 
-		
 		public Bitcoin()
 		{
+			_client = new HttpClient();
+			
 			mainPageViewModel = new MainPageViewModel();
 			InitializeComponent();
 			this.BindingContext = mainPageViewModel;
+		    getLcoalBitcoinBalance();
+
+		}
+
+		private async Task getLcoalBitcoinBalance() 
+		{
+			string authKey = AppSettings.GetValueOrDefault("AuthKey","");
+			string secrectKey = AppSettings.GetValueOrDefault("SecrectKey", "");
 
 
+			if (!String.IsNullOrEmpty(authKey) && !String.IsNullOrEmpty(secrectKey))
+			{
+				long nonce = DateTime.Now.Ticks;
+				string api_endpoint = "/api/wallet/";
+				string url = "https://localbitcoins.com/api/wallet/";
+				string get_or_post_params_urlencoded = "";
+				string hmac_key = authKey;
+				string message = nonce.ToString() + hmac_key + api_endpoint + get_or_post_params_urlencoded;
+				byte[] message_bytes = Encoding.UTF8.GetBytes(message);
+				byte[] key = Encoding.UTF8.GetBytes(secrectKey);
+				HMACSHA256 hmac = new HMACSHA256(key);
+				byte[] hashValue = hmac.ComputeHash(message_bytes);
+				var converted = BitConverter.ToString(hashValue).Replace("-", "").ToUpper();
+				try
+				{
+					_client.DefaultRequestHeaders.Add("Apiauth-Key", authKey);
+					_client.DefaultRequestHeaders.Add("Apiauth-Nonce", nonce+"");
+					_client.DefaultRequestHeaders.Add("Apiauth-Signature", converted);
+					var response = await _client.GetAsync(url);
+					if (response.IsSuccessStatusCode)
+					{
+						var content = await response.Content.ReadAsStringAsync();
+						var settings = new JsonSerializerSettings
+						{
+							NullValueHandling = NullValueHandling.Ignore,
+							MissingMemberHandling = MissingMemberHandling.Ignore,
+							Formatting = Formatting.Indented
+							
+						};						
+						Forms.Model.LCB rootObject = JsonConvert.DeserializeObject<Forms.Model.LCB>(content, settings);
+						
+						balanceTxt.Text =  rootObject.Data.Total.Balance != null ? rootObject.Data.Total.Balance : string.Empty ;
+						btcEntry.Text = rootObject.Data.Total.Balance != null ? rootObject.Data.Total.Balance : string.Empty;
+					}
+				}
+				catch (Exception ex)
+				{
+
+					balanceTxt.Text = "Error: La autenticacion con localbitcoin falló";
+				}
+
+			}
+			else
+			{
+				balanceTxt.Text = "Error: Las Credenciales no han sido definidas.";
+			}
+			
 		}
 
 		private void btnCalc_Clicked(object sender, EventArgs e)

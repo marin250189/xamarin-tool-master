@@ -10,7 +10,7 @@ namespace Forms.Model
 	public class BitcoinModel: BaseViewModel
 	{
 		private string rates1;
-
+		public string Balance { get; set; }
 		public string Currency { get; set; }
 		public string avg_12h { get; set; }
 		public string volume_btc { get; set; }
