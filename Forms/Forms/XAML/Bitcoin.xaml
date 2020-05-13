@@ -33,11 +33,29 @@
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="50" />
+				<RowDefinition Height="50" />
+				<RowDefinition Height="50" />
+				<RowDefinition Height="50" />
+				<RowDefinition Height="50" />
 			</Grid.RowDefinitions>
 			<Label Grid.Column="0" Grid.Row="0" Margin="0,20,0,0"  Text="{Binding bitcoinModel.rates}" VerticalOptions="Center" HorizontalOptions="Center" ></Label>
 			<Button x:Name="btnCalc" Grid.Row="0" Grid.Column="1" Text="x" Clicked="btnCalc_Clicked"  ></Button>
 			<Entry x:Name="btcEntry" Grid.Row="0" Grid.Column="2" Keyboard="Text"></Entry>
 			<Label x:Name="lblCalcResult" Grid.Row="0" Grid.Column="3" Margin="0,20,0,0"></Label>
+			
+			<Label Grid.Column="0" Grid.Row="1" Margin="0,20,0,0"  Text="{Binding bitcoinModel.rates}" VerticalOptions="Center" HorizontalOptions="Center" ></Label>
+			<Button x:Name="btnCalcRate" Grid.Row="1" Grid.Column="1" Text="x" Clicked="btnCalcRate_Clicked"  ></Button>
+			<Entry x:Name="VEStxt" Grid.Row="1" Grid.Column="2" Keyboard="Text" Placeholder="Tasa/dia"></Entry>
+			<Label x:Name="lblrateResult" Grid.Row="1" Grid.Column="3" Margin="0,20,0,0"></Label>
+			
+			
+			<Button x:Name="btnCalcGanancia" Grid.Row="2" Grid.Column="0" Text="x" Clicked="btnCalcGanancia_Clicked"  ></Button>
+			<Entry x:Name="Gananciatxt" Grid.Row="2" Grid.Column="1" Keyboard="Text" Placeholder="ganancia"></Entry>
+			<Label x:Name="lblGananciaResult" Grid.Row="2" Grid.Column="2" Margin="0,20,0,0"></Label>
+
+			<Label x:Name="lblCompra" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,20,0,0"></Label>
+			<Label x:Name="lblVenta" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,20,0,0"></Label>
+
 
 		</Grid>
 	</StackLayout>

@@ -103,12 +103,37 @@ namespace Forms.XAML
 				decimal last = decimal.Parse(mainPageViewModel.bitcoinModel.rates, CultureInfo.InvariantCulture);
 				decimal myBtcAmount = decimal.Parse(btcEntry.Text, CultureInfo.InvariantCulture);
 				decimal result = last * myBtcAmount;
-				lblCalcResult.Text = result.ToString();
+				lblCalcResult.Text = String.Format("{0:0.00}", result);
 			}
 			
 		}
 
+		private void btnCalcRate_Clicked(object sender, EventArgs e)
+		{
+			if (mainPageViewModel.bitcoinModel != null && mainPageViewModel.bitcoinModel.rates != string.Empty && VEStxt.Text != string.Empty)
+			{
+				decimal last = decimal.Parse(mainPageViewModel.bitcoinModel.rates, CultureInfo.InvariantCulture);
+				decimal vesRate = decimal.Parse(VEStxt.Text, CultureInfo.InvariantCulture);
+				decimal result = last * vesRate;
+				lblrateResult.Text = String.Format("{0:n}", result); 
+			}
+		}
 
+		private void btnCalcGanancia_Clicked(object sender, EventArgs e)
+		{
+			if (mainPageViewModel.bitcoinModel != null && mainPageViewModel.bitcoinModel.rates != string.Empty && VEStxt.Text != string.Empty && lblrateResult.Text != string.Empty && Gananciatxt.Text != string.Empty)
+			{
+				decimal vesRate = decimal.Parse(lblrateResult.Text, CultureInfo.InvariantCulture);
+				int gananciaxciento = int.Parse(Gananciatxt.Text);
+				decimal result = (vesRate * gananciaxciento)/100;
+				lblGananciaResult.Text = String.Format("{0:n}", result);
+				string compra = String.Format("{0:n}", (vesRate - result));
+				lblCompra.Text = "Compra :" + compra;
+
+				string venta = String.Format("{0:n}", (vesRate + result));
+				lblVenta.Text = "Venta :" + venta;
+			}
+		}
 	}
 
 	
