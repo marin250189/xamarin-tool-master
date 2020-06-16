@@ -4,6 +4,21 @@
              x:Class="Forms.XAML.MainPageDetail"
              Title="All in One">
   <StackLayout Padding="10">
-    <Label Text="This is a detail page. To get the 'triple' line icon on each platform add a icon to each platform and update the 'Master' page with an Icon that references it."/>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+				<ColumnDefinition Width="Auto"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+		</Grid>
+		<Entry x:Name="cityTxt" Placeholder="City" Grid.Row="0" Grid.Column="0" Text="{Binding City}"></Entry>
+		<Button x:Name="temperatureBtc" Text="weather" Grid.Row="0" Grid.Column="1" Command="{Binding WeatherCommand}"></Button>
+		<ActivityIndicator Grid.Column="2" Grid.Row="0" x:Name="ActivityLoading" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" IsEnabled="True" HorizontalOptions="Center"></ActivityIndicator>
+		<Image x:Name="iconImg" Grid.Row="1" Grid.Column="0" Source="{Binding iconUrl}"></Image>
+		<Label x:Name="temperatureText" Grid.Row="2" Text="{Binding Temp}" FontAttributes="Bold"></Label>
   </StackLayout>
 </ContentPage>

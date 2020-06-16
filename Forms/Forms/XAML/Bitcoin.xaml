@@ -15,7 +15,7 @@
 				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
 			<Label Text="Saldo LocalBitcoin : " TextColor="Black" Grid.Column="0" Grid.Row="0" />
-			<Label x:Name="balanceTxt" TextColor="Black" Grid.Column="1" Grid.Row="0" />
+			<Label x:Name="balanceTxt" Text="Loading..." TextColor="Black" Grid.Column="1" Grid.Row="0" />
 			<Label Text="Currency" BackgroundColor="Green" Grid.Column="0" Grid.Row="1" />
 			<Label Text="Price" BackgroundColor="Green" Grid.Column="1" Grid.Row="1"/>
 			<Label Grid.Column="0" Grid.Row="2" Text="{Binding bitcoinModel.Currency}" VerticalOptions="Center" HorizontalOptions="Center" />
