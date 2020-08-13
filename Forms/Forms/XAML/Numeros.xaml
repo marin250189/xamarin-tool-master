@@ -9,7 +9,32 @@
 				<RowDefinition Height="351"></RowDefinition>
 				
 			</Grid.RowDefinitions>
-			<Label x:Name="Numerobtn" Text="{Binding Numero}" Grid.Row="0" FontSize="150"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+			<ListView x:Name="BalanceView"
+            ItemsSource="{Binding Savings_Balances}">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="30*" />
+									<ColumnDefinition Width="30*" />
+									<ColumnDefinition Width="30*" />
+								</Grid.ColumnDefinitions>
+
+								<Label  Grid.Column="0" Text="{Binding ID}"/>
+								<Label  Grid.Column="1" Text="{Binding DESCRIPTION}"/>
+								<Label Grid.Column="2" Text="{Binding AMOUNT}"/>
+							</Grid>
+
+
+
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
 		</Grid>
 		<Grid>
 			<Grid.RowDefinitions>
@@ -19,8 +44,7 @@
 				<ColumnDefinition></ColumnDefinition>
 				<ColumnDefinition></ColumnDefinition>
 			</Grid.ColumnDefinitions>
-			<Button Grid.Row="0" Grid.Column="0" Text="Anterior" Clicked="Button_Anterior"></Button>
-			<Button Grid.Row="0" Grid.Column="1" Text="Siguiente" Clicked="Button_Siguiente"></Button>
+			
 		</Grid>
 			
         </StackLayout>

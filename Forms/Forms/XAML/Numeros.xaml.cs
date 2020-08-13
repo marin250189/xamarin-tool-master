@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Forms.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,37 +14,18 @@ namespace Forms.XAML
 	public partial class Numeros : ContentPage
 	{
 		public int Numero { get; set; }
+		public BalanceViewModel balancePageViewModel { get; set; }
 		public Numeros ()
 		{
+			balancePageViewModel = new BalanceViewModel();
 			InitializeComponent ();
-			Numero = 0;
-			Numerobtn.Text =Numero.ToString();
+			this.BindingContext = balancePageViewModel;
+
 		}
 
-		private void Button_Anterior(object sender, EventArgs e)
-		{
-			if (Numero <=1)
-			{
-				Numero = 0;
-			}
-			else
-			{
-				Numero--;
-			}
-			Numerobtn.Text = Numero.ToString();
-		}
+		
+			
 
-		private void Button_Siguiente(object sender, EventArgs e)
-		{
-			if (Numero >= 15)
-			{
-				Numero = 0;
-			}
-			else
-			{
-				Numero++;
-			}
-			Numerobtn.Text = Numero.ToString();
-		}
+		
 	}
 }

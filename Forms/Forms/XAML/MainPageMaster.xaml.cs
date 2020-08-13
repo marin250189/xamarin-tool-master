@@ -45,7 +45,7 @@ namespace Forms.XAML
 					new MainPageMenuItem { Id = 0, Title = "Traductor",TargetType = typeof(Traductor) },
 					new MainPageMenuItem { Id = 1, Title = "LCB Config", TargetType = typeof(DolarToday) },
 					new MainPageMenuItem { Id = 2, Title = "Bitcoin" , TargetType = typeof(Bitcoin)},
-					new MainPageMenuItem { Id = 3, Title = "Numeros" , TargetType = typeof(Numeros)},
+					new MainPageMenuItem { Id = 3, Title = "Balance" , TargetType = typeof(Numeros)},
 					new MainPageMenuItem { Id = 3, Title = "Wather" },
 
 				});

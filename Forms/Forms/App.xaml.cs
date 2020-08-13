@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Businesslayer.Balance;
+using DataAccessLayer.BalanceDAO;
+using DataAccessLayer.Common;
+using System;
+using Unity;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,8 +15,15 @@ namespace Forms
 		{
 			
 			InitializeComponent();
-
+			RegisterService();
 			MainPage = new XAML.MainPage();
+		}
+
+		private void RegisterService()
+		{
+			DependencyInjector.Register<IBalanceRepository, BalanceRepository>();
+			DependencyInjector.Register<IBalanceBusiness, BalanceBusiness>();
+		
 		}
 
 		protected override void OnStart()
