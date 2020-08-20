@@ -60,7 +60,7 @@ namespace DataAccessLayer.Common
 			{
 				using (VSOFTDBEntities ctx = new VSOFTDBEntities())
 				{
-					List<T> result = ctx.Set<T>().ToList();
+					List<T> result =  ctx.Set<T>().ToList();
 					return result;
 				}
 			}

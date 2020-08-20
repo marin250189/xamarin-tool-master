@@ -11,6 +11,7 @@ using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System.Collections.ObjectModel;
+using Android.Views;
 
 namespace Forms.ViewModels
 {
@@ -146,15 +147,25 @@ namespace Forms.ViewModels
 
 			try
 			{
+				savings_Balances = new ObservableCollection<Savings_balance>();
+				IsBusy = true;
+				await Task.Delay(2000);
 				IBalanceBusiness balanceBusiness = DependencyInjector.Retrieve<IBalanceBusiness>();
-				savings_Balances = new ObservableCollection<Savings_balance>( await Task.FromResult(balanceBusiness.GetAll().Result.ToList()));
+				var balanceList = await Task.FromResult(balanceBusiness.GetAll().Result.ToList());
+				foreach (var item in balanceList)
+				{
+					savings_Balances.Add(item);
+				}
+
+				IsBusy = false;
 
 
 			}
 			catch (Exception ex)
 			{
 
-				throw;
+				IsBusy = false;
+				
 			}
 
 		}
