@@ -47,5 +47,40 @@ namespace Businesslayer.Balance
 			}
 			
 		}
+
+		public async Task<Savings_balance> Update(Savings_balance savings_Balance)
+		{
+			try
+			{
+				if (savings_Balance != null)
+				{
+					var result = await _balanceRepository.Update(savings_Balance);
+					return result;
+				}
+			}
+			catch (Exception ex)
+			{
+
+				throw new Exception(ex.Message);
+			}
+			return null;
+		}
+		public  bool Delete(Savings_balance savings_Balance)
+		{
+			try
+			{
+				if (savings_Balance != null)
+				{
+					 _balanceRepository.Delete(savings_Balance);
+					
+				}
+			}
+			catch (Exception ex)
+			{
+
+				throw new Exception(ex.Message);
+			}
+			return true;
+		}
 	}
 }

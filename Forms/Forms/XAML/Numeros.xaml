@@ -1,16 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Forms.XAML.Numeros">
+             x:Class="Forms.XAML.Numeros" 
+			 x:Name="ParentView">
    
         <StackLayout>
 		<Grid>
 			<Grid.RowDefinitions>
-				<RowDefinition Height="351"></RowDefinition>
+				<RowDefinition Height="200"></RowDefinition>
+				<RowDefinition Height="*"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
+				
 				
 			</Grid.RowDefinitions>
-			<ListView x:Name="BalanceView"
-            ItemsSource="{Binding Savings_Balances}">
+			
+			<StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" BackgroundColor="Beige" Grid.Row="0">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*"></ColumnDefinition>
+						<ColumnDefinition Width="*"></ColumnDefinition>
+						<ColumnDefinition Width="*"></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+				</Grid>
+				<Entry Text="{Binding DescriptionEntry}"  Placeholder="Descripcion" Grid.Column="0"></Entry>
+				<Entry Text="{Binding MontoEntry}"  Placeholder="Monto" Grid.Column="1" Keyboard="Numeric"></Entry>
+				<Button Text="Add" Grid.Column="2" Command ="{Binding AddBalanceCommand}"></Button>
+				<ActivityIndicator Grid.Column="1"   x:Name="ActivityLoading" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" IsEnabled="True" HorizontalOptions="Center"></ActivityIndicator>
+			</StackLayout>
+			<ListView x:Name="BalanceView" Grid.Row="1"
+            ItemsSource="{Binding Savings_Balances}" SelectedItem="{Binding SelectedBalance}" >
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<ViewCell>
@@ -23,10 +46,10 @@
 									<ColumnDefinition Width="30*" />
 									<ColumnDefinition Width="30*" />
 								</Grid.ColumnDefinitions>
-
-								<Label  Grid.Column="0" Text="{Binding ID}"/>
-								<Label  Grid.Column="1" Text="{Binding DESCRIPTION}"/>
-								<Label Grid.Column="2" Text="{Binding AMOUNT}"/>
+								
+								<Label  Grid.Column="0" Text="{Binding DESCRIPTION}"/>
+								<Entry Grid.Column="1" Text="{Binding AMOUNT}"/>
+								<Button Grid.Column="2" Text="Update" Command ="{ Binding BindingContext.UpdateBalanceCommand, Source={x:Reference ParentView}}" />
 							</Grid>
 
 
@@ -35,15 +58,13 @@
 					</DataTemplate>
 				</ListView.ItemTemplate>
 			</ListView>
+			<Button Text="Delete" Grid.Row="2"  Command ="{Binding DeleteBalanceCommand}"></Button>
 		</Grid>
 		<Grid>
 			<Grid.RowDefinitions>
 				<RowDefinition></RowDefinition>
 			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition></ColumnDefinition>
-				<ColumnDefinition></ColumnDefinition>
-			</Grid.ColumnDefinitions>
+			
 			
 		</Grid>
 			

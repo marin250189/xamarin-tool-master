@@ -9,7 +9,7 @@ namespace DataAccessLayer.Common
 	public interface IRepository<T> where T : class
 	{
 		Task<T> Create(T entity);
-		T Update(T entity);
+		Task<T> Update(T entity);
 		bool Delete(T entity);
 		T GetById(object Id);
 		Task<IList<T>> GetAll();

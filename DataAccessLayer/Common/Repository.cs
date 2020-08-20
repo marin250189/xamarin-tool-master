@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +18,9 @@ namespace DataAccessLayer.Common
 					using (VSOFTDBEntities ctx = new VSOFTDBEntities())
 					{
 
-						//T result = ctx.Set<T>().Add(entity);
-						//await ctx.SaveChangesAsync();
-						//return result;
+						ctx.Set<T>().Add(entity);
+						await ctx.SaveChangesAsync();
+						return entity;
 					}
 				}
 			}
@@ -33,7 +34,24 @@ namespace DataAccessLayer.Common
 
 		public bool Delete(T entity)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				using (VSOFTDBEntities ctx = new VSOFTDBEntities())
+				{
+
+					ctx.Set<T>().Remove(entity);
+					ctx.SaveChanges();
+					
+				}
+				
+
+			}
+			catch (Exception ex)
+			{
+
+				throw new Exception(ex.Message);
+			}
+			return true;
 		}
 
 		public async Task<IList<T>> GetAll()
@@ -77,9 +95,26 @@ namespace DataAccessLayer.Common
 			return null;
 		}
 
-		public T Update(T entity)
+		public async Task<T> Update(T entity)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				using (VSOFTDBEntities context = new VSOFTDBEntities())
+				{
+					context.Entry(entity).State = EntityState.Modified;
+					context.ChangeTracker.DetectChanges();
+					var tt = context.ChangeTracker.HasChanges();
+					context.SaveChanges();
+					return entity;
+
+				}
+			}
+			catch (Exception ex)
+			{
+
+				throw new Exception(ex.Message);
+			}
+			
 		}
 	}
 }
