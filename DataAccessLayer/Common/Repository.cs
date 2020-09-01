@@ -1,9 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.EntityFrameworkCore.Query.Internal;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Reflection;
 using System.Threading.Tasks;
+
 
 namespace DataAccessLayer.Common
 {
@@ -60,6 +64,7 @@ namespace DataAccessLayer.Common
 			{
 				using (VSOFTDBEntities ctx = new VSOFTDBEntities())
 				{
+					
 					List<T> result =  ctx.Set<T>().ToList();
 					return result;
 				}
@@ -116,5 +121,7 @@ namespace DataAccessLayer.Common
 			}
 			
 		}
+		
+		
 	}
 }

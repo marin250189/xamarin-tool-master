@@ -212,11 +212,14 @@
   <ItemGroup>
     <Compile Include="BalanceDAO\Balance.cs" />
     <Compile Include="BalanceDAO\IBalance.cs" />
+    <Compile Include="BaseEntity.cs" />
     <Compile Include="Common\IRepository.cs" />
     <Compile Include="Common\Repository.cs" />
     <Compile Include="Context\VSOFTDBEntities.cs" />
+    <Compile Include="Currencies.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Savings_balance.cs" />
+    <Compile Include="Savings_Type.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

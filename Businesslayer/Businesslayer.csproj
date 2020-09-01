@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Balance\BalanceBusiness.cs" />
     <Compile Include="Balance\IBalanceBusiness.cs" />
+    <Compile Include="Currency\CurrencyBusiness.cs" />
+    <Compile Include="Currency\ICurrencyBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Balance_Type\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

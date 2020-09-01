@@ -7,16 +7,23 @@
         <StackLayout>
 		<Grid>
 			<Grid.RowDefinitions>
-				<RowDefinition Height="200"></RowDefinition>
+				<RowDefinition Height="225"></RowDefinition>
 				<RowDefinition Height="*"></RowDefinition>
+				<RowDefinition Height="Auto"></RowDefinition>
 				<RowDefinition Height="Auto"></RowDefinition>
 				
 				
 			</Grid.RowDefinitions>
 			
 			<StackLayout VerticalOptions="Start" HorizontalOptions="FillAndExpand" BackgroundColor="Beige" Grid.Row="0">
+				<StackLayout Orientation="Horizontal">
+					<Label Text="{Binding Usd_balance}" ></Label>
+					<Label Text="{Binding Eur_balance}" ></Label>
+				</StackLayout>
+				
 				<Grid>
 					<Grid.RowDefinitions>
+						<RowDefinition></RowDefinition>
 						<RowDefinition></RowDefinition>
 						<RowDefinition></RowDefinition>
 						<RowDefinition></RowDefinition>
@@ -27,8 +34,11 @@
 						<ColumnDefinition Width="*"></ColumnDefinition>
 					</Grid.ColumnDefinitions>
 				</Grid>
+				
+				<Picker ItemsSource="{Binding CurrenciesList}" ItemDisplayBinding="{Binding VALUE}" SelectedIndex="{Binding SelectedCurrency }" ></Picker>
 				<Entry Text="{Binding DescriptionEntry}"  Placeholder="Descripcion" Grid.Column="0"></Entry>
 				<Entry Text="{Binding MontoEntry}"  Placeholder="Monto" Grid.Column="1" Keyboard="Numeric"></Entry>
+				
 				<Button Text="Add" Grid.Column="2" Command ="{Binding AddBalanceCommand}"></Button>
 				<ActivityIndicator Grid.Column="1"   x:Name="ActivityLoading" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" IsEnabled="True" HorizontalOptions="Center"></ActivityIndicator>
 			</StackLayout>
@@ -49,7 +59,8 @@
 								
 								<Label  Grid.Column="0" Text="{Binding DESCRIPTION}"/>
 								<Entry Grid.Column="1" Text="{Binding AMOUNT}"/>
-								<Button Grid.Column="2" Text="Update" Command ="{ Binding BindingContext.UpdateBalanceCommand, Source={x:Reference ParentView}}" />
+								<Picker  x:Name="inlinePicker" Grid.Column="2" ItemsSource="{Binding  Path= BindingContext.CurrenciesList,Source={x:Reference BalanceView}}" ItemDisplayBinding="{Binding VALUE}" SelectedIndex ="{Binding CURRENCY}"  ></Picker>
+								
 							</Grid>
 
 
@@ -58,7 +69,8 @@
 					</DataTemplate>
 				</ListView.ItemTemplate>
 			</ListView>
-			<Button Text="Delete" Grid.Row="2"  Command ="{Binding DeleteBalanceCommand}"></Button>
+			<Button Grid.Row="2" Text="Update" Command ="{ Binding UpdateBalanceCommand}" />
+			<Button Text="Delete" Grid.Row="3"  Command ="{Binding DeleteBalanceCommand}"></Button>
 		</Grid>
 		<Grid>
 			<Grid.RowDefinitions>

@@ -1,4 +1,6 @@
 ﻿using Businesslayer.Balance;
+using Businesslayer.Currency;
+using DataAccessLayer;
 using DataAccessLayer.BalanceDAO;
 using DataAccessLayer.Common;
 using System;
@@ -23,7 +25,10 @@ namespace Forms
 		{
 			DependencyInjector.Register<IBalanceRepository, BalanceRepository>();
 			DependencyInjector.Register<IBalanceBusiness, BalanceBusiness>();
-		
+
+			DependencyInjector.Register<ICurrencyBusiness, CurrencyBusiness>();
+			DependencyInjector.Register<IRepository<Currencies>, Repository<Currencies>>();
+
 		}
 
 		protected override void OnStart()
